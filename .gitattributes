@@ -1,0 +1,6 @@
+# This ignores my stylesheet and html files
+
+static/* linguist-vendored
+good_health/static/* linguist-vendored
+dashboard/templates/* linguist-vendored
+accounts/templates/* linguist-vendored
