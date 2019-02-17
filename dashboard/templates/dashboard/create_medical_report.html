@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{% load static %}
+<div class="col-md-5 center-block mt-5 py-5 card">
+
+
+    <center><legend>Create Medical Report</legend></center>
+    <!-- Django attribute to catch error or successful message dynamically -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {% if message.tags == 'error' %}
+                    <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                    <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="alert alert-error alert-dismissible fade show li-message" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Your form has errors! &nbsp; </strong>
+            {% for field in form %}
+                {% if field.errors %}
+                    {{field.errors}}.
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'create_medical_report' %}">
+        {% csrf_token %}
+
+
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <strong><label>First Name</label></strong>
+                <input type="text" class="form-control" readonly="readonly" value="{{user.first_name}}">
+            </div>
+            <div class="form-group col-md-6">
+                <strong><label>Last Name</label></strong>
+                <input type="text" class="form-control" readonly="readonly" value="{{user.last_name}}">
+            </div>
+        </div>
+        <div class="row">
+            <!-- <div class="form-group col-md-6">
+                <strong><label>Nationality<sup class="sup">*</sup></label></strong>
+                <input type="text" class="form-control" name="nationality" placeholder="Nationality" required="required">
+            </div> -->
+            <div class="form-group col-md-6">
+                <strong><label>Nationality<sup class="sup">*</sup></label></strong>
+                <select name="nationality" data-show-subtext="true" data-live-search="true" class="form-control">
+                {% include "dashboard/nationality.html" %}
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <strong><label>State<sup class="sup">*</sup></label></strong>
+                <input type="text" class="form-control" name="state" placeholder="State" required="required">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <strong><label>Address<sup class="sup">*</sup></label></strong>
+                <textarea class="form-control" name="address" required="required" placeholder="Enter Your Address"></textarea>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group col-md-12">
+                    <strong><label>Occupation<sup class="sup">*</sup></label></strong>
+                    <input type="text" class="form-control" name="occupation" placeholder="Occupation" required="required">
+                </div>
+                <div class="form-group col-md-12">
+                    <p>
+                        <strong><label>Gender<sup class="sup">*</sup></label></strong><br/>
+                        <input type="radio" id="radio_m" name="gender" value="m" required="required">
+                        <label for="radio_m"><strong>Male</strong></label> &nbsp; &nbsp;
+                        <input type="radio" id="radio_f" name="gender" value="f" required="required">
+                        <label for="radio_f"><strong>Female</strong></label> &nbsp; &nbsp; 
+                        <input type="radio" id="radio_o" name="gender" value="o" required="required">
+                        <label for="radio_o"><strong>Others</strong></label>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <strong><label>Telephone No.<sup class="sup">*</sup></label></strong>
+                <input type="text" class="form-control" name="telephone" placeholder="Telephone Number" required="required">
+            </div>
+            <div class="form-group col-md-6">
+                <strong><label>Date Of Birth.</label></strong>
+                <input type="text" class="form-control" name="dob" placeholder="Date Of Birth">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <strong><label>Medical Condition<sup class="sup">*</sup></label></strong>
+            <input type="text" name="medical_condition" class="form-control"  placeholder="Medical Condition"
+                required="required">
+        </div>
+
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <strong><label>Weight</label></strong>
+                <input type="number" minlength="10" name="weight" class="form-control" placeholder="Weight">
+            </div>               
+            <div class="form-group col-md-6">
+                <p>
+                    <strong><label>Marital Status<sup class="sup">*</sup></label></strong><br />
+                    <input type="radio" id="radio_mm" name="marital_status" value="m" required="required">
+                    <label for="radio_mm"><strong>Married</strong></label> &nbsp; &nbsp;
+                    <input type="radio" id="radio_ss" name="marital_status" value="s" required="required">
+                    <label for="radio_ss"><strong>Single</strong></label> &nbsp; &nbsp;
+                </p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">CREATE MEDICAL REPORT</button>
+    </form>
+</div>
+
+{% endblock %}

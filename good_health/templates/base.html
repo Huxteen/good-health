@@ -1,0 +1,122 @@
+{% load static %}
+<!doctype html >
+<html class="no-js" lang="en">
+
+<head>
+    <!-- USEFULL META -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="We Are Good Health Taking Care of All Your Health Issues." />
+    <meta name="keywords" content="App, Landing, Business, Onepage, Html, Business, Health, GoodHealth" />
+
+    <title>We Are Good Health </title>
+
+    <!--  == = FAVICON ICON == == -->
+    <link rel="shortcut icon" type="image/ico" href="{% static 'assets/img/sweet.jpg' %}" />
+
+    <!-- MAIN STYLESHEETS -->
+    <link href="{% static 'assets/css/materia.bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/fonts/css/fontawesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" crossorigin="anonymous">
+    
+
+
+</head>
+
+
+<body>
+
+
+    <section>    
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container pad-md-0">
+                <a class="navbar-brand" href="#"><i class="fas fa-thumbs-up" style="color: #1c89aa;"></i>&nbsp;<span style="color: #1c89aa;">Good</span><span style="color: #e5e507;">Health</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarColor03" >
+                    {% if user.is_authenticated %}
+                        <ul class="navbar-nav ml-auto" >
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">FEATURES</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> ABOUT US</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{{user.email|capfirst}}</a>
+                            </li>
+                        
+                            <li class="nav-item dropdown show">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                                    aria-expanded="true">PROFILE</a>
+                                <div class="dropdown-menu " x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <a class="dropdown-item" href="{% url 'create_medical_report' %}">CREATE MEDICAL REPORT</a>
+                                    <a class="dropdown-item" href="{% url 'my_medical_report' %}">MY MEDICAL REPORT</a> 
+                                    <a class="dropdown-item" href="{% url 'all_medical_report' %}">ALL MEDICAL REPORT</a> 
+                                    <a class="dropdown-item" href="#">NOTIFICATIONS</a>
+                                    <a class="dropdown-item" href="{% url 'medical_statistics' %}">MEDICAL STATISTIC</a>
+                                    <a class="dropdown-item" href="#">VIEW PROFILE</a>
+                                    <a class="dropdown-item" href="#">DASHBOARD</a>
+                                    <a class="dropdown-item" href="#">CHANGE PASSWORD</a>
+                                    <a class="dropdown-item" href="#">SEARCH DETAILS</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()}" onClick=""><i class="fas fa-sign-out-alt"></i>&nbsp; LOGOUT</a>
+                                </div>
+                            </li>
+                            <form id="logout" method="POST" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <input type="hidden">
+                            </form>
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">FEATURES</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> ABOUT US</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">LOGIN</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'signup' %}"> &nbsp; &nbsp; SIGN UP</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </nav>
+    </section>
+
+
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+
+    <!--====== SCRIPTS JS ======-->
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" crossorigin="anonymous"></script> -->
+</body>
+
+</html>

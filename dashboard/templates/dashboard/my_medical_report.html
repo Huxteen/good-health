@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{% load static %}
+<div class="container mt-5 pad-md-0">
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" {% endif%}>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {% if message.tags == 'error' %}
+                <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">s/n</th>
+                <th scope="col">Nationality</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Telephone</th>
+                <th scope="col">Occupation</th>
+                <th scope="col">Medical Condition</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Added On</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in my_medical_report %}
+                {% if forloop.counter|divisibleby:2 %}
+                    <tr class="table-active">
+                {% else %}
+                    <tr>
+                {% endif %}
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{report.nationality|capfirst}}</td>
+                    <td>
+                        {% if report.gender == "m" %}
+                            Male
+                        {% elif report.gender == "f" %}
+                            Female
+                        {% else %}
+                            Others
+                        {% endif %}
+                    <td>{{report.telephone}}</td>
+                    <td>{{report.occupation|capfirst}}</td>
+                    <td>{{report.medical_condition|title}}</td>
+                    <td>{{report.weight}}</td>
+                    <td>{{report.date_added}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" title="Edit Report" style="color: #fff;"><i class="fas fa-pencil-alt"></i></a>
+                        <a class="btn btn-sm btn-danger" title="Delete Report" style="color: #fff;"><i class="fas fa-times"></i> </a>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

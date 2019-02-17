@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{% load static %}
+<div class="col-md-5 center-block mt-5 py-5 card">
+
+
+    <legend>Create Account</legend>
+    <!-- Django attribute to catch error or successful message dynamically -->
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {% if message.tags == 'error' %}
+                <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="alert alert-error alert-dismissible fade show li-message" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Your form has errors! &nbsp; </strong>
+        {% for field in form %}            
+            {% if field.errors %}
+                {{field.errors}}.                    
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'signup' %}">
+        {{is_staff}}
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="exampleInputFirstName">First Name</label>
+                <input type="text" class="form-control" name="first_name" placeholder="First Name" required="required">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="exampleInputLastName">Last Name</label>
+                <input type="text" class="form-control" name="last_name" placeholder="Last Name" required="required">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Email Address"
+                required="required">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <p>
+                <strong>Are you a medical practitional? &nbsp; &nbsp; </strong>
+               
+
+                <input type="radio" id="radio_yes" name="is_staff" value="1" required="required">
+                <label for="radio_yes"><strong>Yes</strong></label> &nbsp; &nbsp; &nbsp; &nbsp;
+
+                <input type="radio" id="radio_no" name="is_staff" value="0" required="required">
+                <label for="radio_no"><strong>No</strong></label> &nbsp; &nbsp; &nbsp; &nbsp;
+
+
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" name="password1" placeholder="Enter Password" required="required">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">Confirm Password</label>
+            <input type="password" class="form-control" name="password2" placeholder="Confirm Password" required="required">
+        </div>
+        <button type="submit" class="btn btn-primary">SIGN UP</button>
+    </form>
+</div>
+{% endblock %}

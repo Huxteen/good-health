@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+{% load static %}
+<div class="container mt-5 pad-md-0">
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" {% endif %}>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% if message.tags == 'error' %}
+            <strong>Whoops! &nbsp; </strong> {{ message }}.
+            {% else %}
+            <strong>Congratulations! &nbsp; </strong> {{ message }}.
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="row">
+    <div class="col-md-4">
+        <!-- <form action="{% url 'all_medical_report' %}" method="POST" id="new_user_form"> -->
+        <form id="new_user_form">
+            {% csrf_token %}
+            <select name="search_element" id="select_element" class='form-control'>
+            <!-- <select name="search_element" id="select_element" onchange="this.form.submit()" class='form-control'> -->
+                <option value="none" >--Select Search--</option>
+                <option value="none" >--Clear Search--</option>
+                {% for all_statistic  in all_statistics %}
+                <option value="{{all_statistic.0}}">{{all_statistic.0|title}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn btn primary">Search</button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form action="{% url 'all_medical_report' %}" method="GET">
+            <button type="submit" class="btn btn-primary btn-sm">clear Search</button>
+        </form>
+    </div>
+    </div>
+    <table class="table table-hover" id="mytable" class="w3-table-all">
+        <thead class="header">
+            <tr>
+                <th scope="col">s/n</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Nationality</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Telephone</th>
+                <th scope="col">Occupation</th>
+                <th scope="col">Medical Condition</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Added On</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in all_medical_report %}
+                {% if forloop.counter|divisibleby:2 %}
+                <tr class="table-active">
+                {% else %}
+                <tr>
+                {% endif %}
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{report.user_id.get_full_name|capfirst}}</td>
+                    <td>{{report.nationality|capfirst}}</td>
+                    <td>
+                        {% if report.gender == "m" %}
+                        Male
+                        {% elif report.gender == "f" %}
+                        Female
+                        {% else %}
+                        Others
+                        {% endif %}
+                    <td>{{report.telephone}}</td>
+                    <td>{{report.occupation|capfirst}}</td>
+                    <td>{{report.medical_condition|title}}</td>
+                    <td>{{report.weight}}</td>
+                    <td>{{report.date_added}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-danger" type="button" title="Save Report" data-toggle="tooltip" data-placement="top" style="color: #fff;"><i class="fas fa-save"></i> </a>
+                        <a class="btn btn-sm btn-warning" title="Remove Report" style="color: #fff;"><i class="fas fa-eraser"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}
