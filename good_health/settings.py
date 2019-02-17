@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     'dashboard',
     'mathfilters',
+    'rest_framework',
+    'django_filters',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'

@@ -17,5 +17,10 @@ urlpatterns = [
     path('my-medical-report', views.my_medical_report, name='my_medical_report'),
     path('all-medical-report', views.all_medical_report, name='all_medical_report'),
     path('medical-statistics', views.medical_statistics, name='medical_statistics'),
+    path('medical-api', views.medical_api, name='medical_api'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

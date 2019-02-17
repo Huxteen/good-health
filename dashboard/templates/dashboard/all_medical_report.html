@@ -19,28 +19,27 @@
         {% endfor %}
     </div>
     {% endif %}
-    <div class="row">
+    
+
     <div class="col-md-4">
-        <!-- <form action="{% url 'all_medical_report' %}" method="POST" id="new_user_form"> -->
-        <form id="new_user_form">
+
+        <form action="{% url 'all_medical_report' %}" method="POST" id="ajax-medical-record-filter">
             {% csrf_token %}
-            <select name="search_element" id="select_element" class='form-control'>
-            <!-- <select name="search_element" id="select_element" onchange="this.form.submit()" class='form-control'> -->
-                <option value="none" >--Select Search--</option>
-                <option value="none" >--Clear Search--</option>
-                {% for all_statistic  in all_statistics %}
-                <option value="{{all_statistic.0}}">{{all_statistic.0|title}}</option>
-                {% endfor %}
-            </select>
-            <button type="submit" class="btn btn primary">Search</button>
+            <div class="row">
+                <select data-field="medical_condition" id="medical-conditions" class='form-control col-md-8'>
+                    <option value="all" >--Select Search--</option>                
+                    <option value="all" >show all</option>                
+                    {% for all_statistic  in all_statistics %}
+                    <option value="{{all_statistic.0}}">{{all_statistic.0|title}}</option>
+                    {% endfor %}
+                </select>&nbsp; &nbsp;
+                <button  class="btn btn-primary btn-sm col-md-3" >Filter Search</button>
+            </div>
+            
         </form>
     </div>
-    <div class="col-md-4">
-        <form action="{% url 'all_medical_report' %}" method="GET">
-            <button type="submit" class="btn btn-primary btn-sm">clear Search</button>
-        </form>
-    </div>
-    </div>
+
+ 
     <table class="table table-hover" id="mytable" class="w3-table-all">
         <thead class="header">
             <tr>
@@ -56,7 +55,7 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="js-medical-report">
             {% for report in all_medical_report %}
                 {% if forloop.counter|divisibleby:2 %}
                 <tr class="table-active">

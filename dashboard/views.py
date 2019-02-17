@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from collections import Counter
 from dashboard.models import MedicalReport
 from dashboard.forms import MedicalReportForm
@@ -77,3 +78,11 @@ def medical_statistics(request):
     context = {'all_statistics': all_statistics, 'other_statistics': other_statistics,
                'statistics': statistics, 'total_report': total_report}
     return render(request, 'dashboard/medical_statistics.html', context)
+
+
+def medical_api(request):
+    context = {
+        "title": "The winning programming",
+        "description": "Programming is a game of consistency and all the game is going on to the better",
+    }
+    return JsonResponse(context)
