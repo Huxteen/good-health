@@ -5,205 +5,70 @@
 {% block content %}
 {% load static %}
 {% load mathfilters %}
-<div class="container mt-5 pad-md-0">
-
-    <div class="row">
-        {% for statistic in statistics %}       
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionB">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconB deviceIconX"><i class="fa fa-spinner "></i></p>
-                        <p class="deviceSectionPrice"> 76%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">0{{statistic.1}}</p>
-                        <small class="form-text text-center">{{statistic.0.0}} </small>
-                        <p class="secondPercent">
-                            {% with numerator=statistic.1 denominator=total_report %}
-                                {{ numerator|div:denominator }}%
-                            {% endwith %}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>    
-</div>
-{{other_statistics}}
-{% for all_statistic in all_statistics %}
-
-    {{all_statistic.0}}
-
-{% endfor %}
+<section id="medical-statistics">
+    <div class="container">
 
 
-
-
-
-<section class="dashboardNotificationBox" style="margin-bottom: 500px;">
-    <div class="container marginTopDashboard">
-        <div class="row">
-        
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 row pad-md cardBox boxShadow deviceSection">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconWhite deviceIconX"><i class="fa fa-cogs"></i></p>
-                        <p class="deviceSectionPrice"> 90%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondP">5637</p>
-                        <small class="form-text text-center">Total Device</small>
-                        <p class="secondPercent">100%</p>
-                    </div>
+        <div class="col-md-3">
+            <div class="col-md-12 pad-md-0 box-shadow each-statistics-section">
+                <div class="col-md-12 pad-md-0 text-center">
+                    <i class="fa fa-medkit primary-color"></i>
+                </div>
+                <div class="col-md-12 pad-md-0 first-p-container text-center">
+                    <p class="first-statistics-p">{{total_report}}</p>
+                    <small>Total Medical Record</small>
+                </div>
+                <div class="col-md-12 pad-md-0 percentage-statistics text-center">
+                    <p>100%</p>
+                </div>
+                <div class="col-md-12 pad-md-0 title-of-illness text-center statistic-bg-green">
+                    <p>Total Medical Record</p>
                 </div>
             </div>
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionG">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconG deviceIconX"><i class="fa fa-thumbs-up"></i></p>
-                        <p class="deviceSectionPrice">  60%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">2300</p>
-                        <small class="form-text text-center"> Device Up </small>
-                        <p class="secondPercent">50%</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionR">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconR deviceIconX"><i class="fa fa-thumbs-down"></i></p>
-                        <p class="deviceSectionPrice">  60%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">1027</p>
-                        <small class="form-text text-center"> Device Down</small>
-                        <p class="secondPercent">20%</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionB">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconB deviceIconX"><i class="fa fa-spinner"></i></p>
-                        <p class="deviceSectionPrice">  76%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">345</p>
-                        <small class="form-text text-center">Depedent Device </small>
-                        <p class="secondPercent">30%</p>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 row pad-md cardBox boxShadow deviceSection">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconWhite deviceIconX"><i class="fa fa-cogs"></i></p>
-                        <p class="deviceSectionPrice"> 90%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondP">5637</p>
-                        <small class="form-text text-center">Total Device</small>
-                        <p class="secondPercent">100%</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionG">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconG deviceIconX"><i class="fa fa-thumbs-up"></i></p>
-                        <p class="deviceSectionPrice">  60%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">2300</p>
-                        <small class="form-text text-center"> Device Up </small>
-                        <p class="secondPercent">50%</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionR">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconR deviceIconX"><i class="fa fa-thumbs-down"></i></p>
-                        <p class="deviceSectionPrice">  60%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">1027</p>
-                        <small class="form-text text-center"> Device Down</small>
-                        <p class="secondPercent">20%</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionB">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconB deviceIconX"><i class="fa fa-spinner "></i></p>
-                        <p class="deviceSectionPrice">  76%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">345</p>
-                        <small class="form-text text-center">Depedent Device </small>
-                        <p class="secondPercent">30%</p>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 row pad-md cardBox boxShadow deviceSection">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconWhite deviceIconX"><i class="fa fa-cogs"></i></p>
-                        <p class="deviceSectionPrice"> 90%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondP">5637</p>
-                        <small class="form-text text-center">Total Device</small>
-                        <p class="secondPercent">100%</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionG">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconG deviceIconX"><i class="fa fa-thumbs-up"></i></p>
-                        <p class="deviceSectionPrice">  60%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">2300</p>
-                        <small class="form-text text-center"> Device Up </small>
-                        <p class="secondPercent">50%</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionR">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconR deviceIconX"><i class="fa fa-thumbs-down"></i></p>
-                        <p class="deviceSectionPrice">  60%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">1027</p>
-                        <small class="form-text text-center"> Device Down</small>
-                        <p class="secondPercent">20%</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 30px;">
-                <div class="col-md-12 pad-md row cardBox boxShadow deviceSectionB">
-                    <div class="col-md-6">
-                        <p class="deviceSectionIconB deviceIconX"><i class="fa fa-spinner "></i></p>
-                        <p class="deviceSectionPrice">  76%</p>
-                    </div>
-                    <div class="col-md-6 deviceSectionSecond">
-                        <p class="secondPG">345</p>
-                        <small class="form-text text-center">Depedent Device </small>
-                        <p class="secondPercent">30%</p>
-                    </div>
-                </div>
-            </div>        
         </div>
+
+    {% for statistic in statistics %} 
+        <div class="col-md-3">
+            <div class="col-md-12 pad-md-0 box-shadow each-statistics-section">
+                <div class="col-md-12 pad-md-0 text-center">
+                    {% if forloop.counter|divisibleby:2 %}
+                        <i class="fa fa-medkit primary-color"></i>
+                    {% else %}
+                    <i class="fa fa-medkit secondary-color"></i>
+                    {% endif %}                    
+                </div>
+
+                <div class="col-md-12 pad-md-0 first-p-container text-center">
+                    <p class="first-statistics-p">{{statistic.1}}</p>
+                    <small>{{statistic.0.0|title }}</small>
+                </div>
+                <div class="col-md-12 pad-md-0 percentage-statistics text-center">
+                    <p>
+                        {% with numerator=statistic.1 denominator=total_report %}
+                            {{ numerator|div:denominator|floatformat:'2' }}%
+                        {% endwith %}
+                    </p>
+                </div>
+
+                {% if forloop.counter|divisibleby:2 %}
+                    <div class="col-md-12 pad-md-0 title-of-illness text-center statistic-bg-green">
+                        <p>{{statistic.0.0|title}}</p>
+                    </div>
+                {% else %}
+                    <div class="col-md-12 pad-md-0 title-of-illness text-center statistic-bg-blue">
+                        <p>{{statistic.0.0|title}}</p>
+                    </div>
+                {% endif %}  
+                
+            </div>
+        </div>
+
+    {% endfor %}
+
+        
+
     </div>
 </section>
+
 
 {% endblock %}

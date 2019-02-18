@@ -10,7 +10,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .import views
 
-
+# URL for the dashboard app
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('create-medical-report', views.create_medical_report, name='create_medical_report'),

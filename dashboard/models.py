@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # Create your models here.
-
+# Model collect medical report from users
 class MedicalReport(models.Model):
      user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_ids')
      # m=male and f=female and o=others
@@ -22,8 +22,8 @@ class MedicalReport(models.Model):
      date_added = models.DateTimeField(default=datetime.now, blank=True, null=True)
      date_updated = models.DateTimeField(default=datetime.now, blank=True, null=True)
 
-     def __int__(self):
-        return self.user_id
+     def __str__(self):
+        return self.user_id.email
 
 
 

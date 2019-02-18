@@ -4,42 +4,40 @@
 
 {% block content %}
 {% load static %}
-<div class="col-md-5 center-block mt-5 py-5 card">
+<div class="col-md-5 center-block mt-5 py-5 box-shadow sign-up-container">
+<div class="col-md-12 sign-up-title">CREATE YOUR MEDICAL REPORT</div>
 
-
-    <center><legend>Create Medical Report</legend></center>
-    <!-- Django attribute to catch error or successful message dynamically -->
+     <!-- Django attribute to catch error or successful message dynamically -->
     {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-            <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" {% endif %}>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="messages col-md-12 pad-md-0">
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 {% if message.tags == 'error' %}
-                    <strong>Whoops! &nbsp; </strong> {{ message }}.
+                <strong>Whoops! &nbsp; </strong> {{ message }}.
                 {% else %}
-                    <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                <strong>Congratulations! &nbsp; </strong> {{ message }}.
                 {% endif %}
             </div>
-            {% endfor %}
+        {% endfor %}
         </div>
     {% endif %}
 
     {% if form.errors %}
-        <div class="alert alert-error alert-dismissible fade show li-message" role="alert">
+        <div class="alert col-md-12 pad-md-10 alert-error alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Your form has errors! &nbsp; </strong>
-            {% for field in form %}
-                {% if field.errors %}
-                    {{field.errors}}.
-                {% endif %}
-            {% endfor %}
+        {% for field in form %}            
+            {% if field.errors %}
+                {{field.errors}}.                    
+            {% endif %}
+        {% endfor %}
         </div>
-    {% endif %}
+    {% endif %} 
 
-    <form method="POST" action="{% url 'create_medical_report' %}">
+
+    <form method="POST" action="{% url 'create_medical_report' %}" class="sign-up-form">
         {% csrf_token %}
-
-
 
         <div class="row">
             <div class="form-group col-md-6">
@@ -51,10 +49,11 @@
                 <input type="text" class="form-control" readonly="readonly" value="{{user.last_name}}">
             </div>
         </div>
+
         <div class="row">
             <div class="form-group col-md-6">
                 <strong><label>Nationality<sup class="sup">*</sup></label></strong>
-                <select name="nationality" data-show-subtext="true" data-live-search="true" class="form-control">
+                <select name="nationality" data-show-subtext="true" data-live-search="true" class="form-control" required="required">
                 {% include "dashboard/nationality.html" %}
                 </select>
             </div>
@@ -63,10 +62,11 @@
                 <input type="text" class="form-control" name="state" placeholder="State" required="required">
             </div>
         </div>
+
         <div class="row">
             <div class="form-group col-md-6">
                 <strong><label>Address<sup class="sup">*</sup></label></strong>
-                <textarea class="form-control" name="address" required="required" placeholder="Enter Your Address"></textarea>
+                <textarea class="form-control" cols="4" name="address" required="required" placeholder="Enter Your Address"></textarea>
             </div>
             <div class="col-md-6">
                 <div class="form-group col-md-12">
@@ -94,21 +94,21 @@
             </div>
             <div class="form-group col-md-6">
                 <strong><label>Date Of Birth.</label></strong>
-                <input type="text" class="form-control" name="dob" placeholder="Date Of Birth">
+                {% comment %} <input type="text" class="form-control" name="dob" placeholder="Date Of Birth"> {% endcomment %}
+                <input id="datepicker-view-start" name="dob" class="form-control" type="text" required="required" placeholder="12/03/2010">
             </div>
         </div>
 
         <div class="form-group">
             <strong><label>Medical Condition<sup class="sup">*</sup></label></strong>
-            <input type="text" name="medical_condition" class="form-control"  placeholder="Medical Condition"
-                required="required">
+            <input type="text" name="medical_condition" class="form-control"  placeholder="Medical Condition" required="required">
         </div>
 
 
         <div class="row">
             <div class="form-group col-md-6">
                 <strong><label>Weight</label></strong>
-                <input type="number" minlength="10" name="weight" class="form-control" placeholder="Weight">
+                <input type="number" minlength="10" name="weight" class="form-control" placeholder="Weight" required="required">
             </div>               
             <div class="form-group col-md-6">
                 <p>

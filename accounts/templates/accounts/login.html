@@ -1,13 +1,43 @@
 {% extends 'base.html' %}
 
 
-
 {% block content %}
 {% load static %}
 
-<div class="col-md-4 center-block mt-5 py-5" style="border: 2px solid green;">
-    <legend>Login To Dashboard</legend>
-    <form method="POST" action="#">
+<div class="col-md-4 center-block mt-5 py-5 box-shadow login-container">
+    <div class="col-md-12 login-title">LOGIN TO LIFE</div>
+
+    
+    <!-- Django attribute to catch error or successful message dynamically -->
+    {% if messages %}
+        <div class="messages col-md-12 pad-md-0">
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert  alert-{{message.tags}} alert-dismissable" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% if message.tags == 'error' %}
+                <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="alert col-md-12 pad-md-10 alert-error alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Your form has errors! &nbsp; </strong>
+        {% for field in form %}            
+            {% if field.errors %}
+                {{field.errors}}.                    
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %} 
+
+    
+    <form method="POST" action="{% url 'login' %}" class="login-form">
         {% csrf_token %}
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>

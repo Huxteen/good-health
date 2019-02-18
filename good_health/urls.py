@@ -23,7 +23,7 @@ from . import views
 from dashboard.api.views import MedicalReportAPIView
 from dashboard.views import medical_api
 
-
+# URL patthern for the whole app
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -31,4 +31,9 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('api/medical-record-filter', MedicalReportAPIView.as_view())
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,43 +4,74 @@
 
 {% block content %}
 {% load static %}
+
+{% comment %} ready to catch error sent to it {% endcomment %}
 <div class="container mt-5 pad-md-0">
     {% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-        <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" {% endif %}>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {% if message.tags == 'error' %}
-            <strong>Whoops! &nbsp; </strong> {{ message }}.
-            {% else %}
-            <strong>Congratulations! &nbsp; </strong> {{ message }}.
-            {% endif %}
+    <div class="messages col-md-12">
+        <div class="col-md-6 center-block">
+            {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible" role="alert" {% endif %}>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {% if message.tags == 'error' %}
+                    <strong>Whoops! &nbsp; </strong> {{ message }}.
+                {% else %}
+                    <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                {% endif %}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
     {% endif %}
     
 
     <div class="col-md-4">
-
         <form action="{% url 'all_medical_report' %}" method="POST" id="ajax-medical-record-filter">
             {% csrf_token %}
+        
             <div class="row">
-                <select data-field="medical_condition" id="medical-conditions" class='form-control col-md-8'>
-                    <option value="all" >--Select Search--</option>                
-                    <option value="all" >show all</option>                
-                    {% for all_statistic  in all_statistics %}
-                    <option value="{{all_statistic.0}}">{{all_statistic.0|title}}</option>
-                    {% endfor %}
-                </select>&nbsp; &nbsp;
-                <button  class="btn btn-primary btn-sm col-md-3" >Filter Search</button>
+                <div class="col-md-8 form-group">
+                    <select data-field="medical_condition" id="medical-conditions" class='form-control' required="required">
+                        <option value="all" >--Select Search--</option>                
+                        <option value="all" >show all</option>                
+                        {% for all_statistic  in all_statistics %}
+                        <option value="{{all_statistic.0}}">{{all_statistic.0|title}}</option>
+                        {% endfor %}
+                    </select>&nbsp; &nbsp;
+                </div>
+                <div class="col-md-4 pad-md-0">
+                    <button  class="btn btn-primary btn-sm" >Filter Medical Condition</button>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+
+
+    <div class="col-md-4 col-md-offset-4">
+        <form action="#" method="POST" id="ajax-medical-record-filter-occupation">
+            {% csrf_token %}
+        
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <select data-field="occupation" id="occupation" class='form-control' required="required">
+                        <option value="all" >--Select Search--</option>                
+                        <option value="all" >show all</option>                
+                        {% for occupation  in occupations %}
+                        <option value="{{occupation.0}}">{{occupation.0|title}}</option>
+                        {% endfor %}
+                    </select>&nbsp; &nbsp;
+                </div>
+                <div class="col-md-4 pad-md-0">
+                    <button  class="btn btn-primary btn-sm" >Filter Occupation</button>
+                </div>
             </div>
             
         </form>
     </div>
 
  
-    <table class="table table-hover" id="mytable" class="w3-table-all">
+    <table class="table table-hover add-border" id="mytable" class="w3-table-all">
         <thead class="header">
             <tr>
                 <th scope="col">s/n</th>
@@ -79,10 +110,14 @@
                     <td>{{report.weight}}</td>
                     <td>{{report.date_added}}</td>
                     <td>
-                        <a class="btn btn-sm btn-danger" type="button" title="Save Report" data-toggle="tooltip" data-placement="top" style="color: #fff;"><i class="fas fa-save"></i> </a>
+                        <a class="btn btn-sm btn-info" type="button" title="Save Report" data-toggle="tooltip" data-placement="top" style="color: #fff;"><i class="fas fa-save"></i> </a>
                         <a class="btn btn-sm btn-warning" title="Remove Report" style="color: #fff;"><i class="fas fa-eraser"></i></a>
                     </td>
                 </tr>
+                {% empty %}
+                    <tr class="table-active">
+                        <td colspan="10" class="text-center">Sorry, there is no medical record yet.</td>
+                    </tr>
             {% endfor %}
         </tbody>
     </table>

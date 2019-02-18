@@ -2,9 +2,9 @@
 .pad-md-0{
   padding : 0px;
 }.pad-md-5{
-  padding : 5px;
+  padding : 0px;
 }.pad-md-10{
-  padding : 10px;
+  padding : 0px;
 }.center-block{
 	float: none;
 	margin: 0 auto;
@@ -20,7 +20,7 @@
 .alert-error .alert-link{color:#721c24}
 
 .errorlist{
-  margin-bottom: -20px !important;
+  margin-bottom: -20px;
 }.sup{
   color: red;
   font-size: 14px;
@@ -67,7 +67,7 @@
     content: '';
     width: 12px;
     height: 12px;
-    background: #00bf6f;
+    background: #1c89aa;
     position: absolute;
     top: 3px;
     left: 3px;
@@ -94,9 +94,7 @@
 
 
 /* This styling for the dashboard Page: */
-.add-border{
-  border: 1px solid #eee;
-}.box-shadow{
+.box-shadow{
   box-shadow: 0px 0px 5px 1px rgba(217,217,217,0.75);
   -o-box-shadow: 0px 0px 5px 1px rgba(217,217,217,0.75);
   -webkit-box-shadow: 0px 0px 5px 1px rgba(217,217,217,0.75);
@@ -132,12 +130,12 @@
 /* The Dashboard Green Background Color: */
 .deviceSectionG{
   /* border: 1px solid #0bb70b;  */
-  border: 1px solid #00bf6f; 
-  background: #00bf6f;
+  border: 1px solid #828aaf; 
+  background: #828aaf;
   color: #fff;
 }.deviceSectionIconG{
   background: #f8f8f8; 
-  color: #00bf6f; 
+  color: #828aaf; 
 }.secondPG{
   font-size: 25px;
   color: #fff;
@@ -267,68 +265,7 @@
   border: 2px solid #fff;
   margin-top: 20px;
 
-}.primary-color{
-  color: #00bf6f !important;
-}.secondary-color{
-  color: #1c89aa !important;
 }
-
-
-
-/* Design for sign up, login, and create medical report container */
-.sign-up-container, .login-container{
-  padding-bottom: 30px;
-  margin-top: 50px;
-}.sign-up-title, .login-title{
-  background: #00bf6f;
-  color: #fff;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-bottom: 12px;
-  margin-top: 15px;
-  border-radius: 4px;
-  font-size: 20px;
-  font-weight: 600;
-}.sign-up-form, .login-form{
-  margin-top: 15px !important;
-}
-
-
-/* Medical-statistics style */
-.each-statistics-section{
-  margin-bottom: 30px;
-}.each-statistics-section i{
-  font-size: 35px;
-  margin-bottom: 15px;
-  margin-top: 20px;
-}.first-statistics-p{
-  font-size: 35px;
-  margin-bottom: 5px;
-}.percentage-statistics{
-  font-size: 18px;
-  margin-bottom: 15px;
-}.title-of-illness{
-  font-size: 16px;
-  padding-top: 15px;
-  padding-bottom: 7px;
-}.first-p-container{
-  margin-bottom: 10px;
-}.first-p-container small{
-  color: #999;
-}.statistic-bg-green{
-  background: #00bf6f;
-  color: #fff;
-}.statistic-bg-blue{
-  background: #1c89aa;
-  color: #fff;
-}
-
-
-/* my medical report page style */
-.my-medical-report{
-  padding-top: 10px;
-}
-
 
 
 

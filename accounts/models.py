@@ -45,6 +45,7 @@ class UserManager(BaseUserManager):
 
 
 # Create a custom User model to use Email as the token validator.
+# The email is more personal than a username
 class User(AbstractBaseUser, PermissionsMixin):
 
     username = None

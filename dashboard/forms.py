@@ -9,6 +9,7 @@ User = get_user_model()
 
 
 class MedicalReportForm(ModelForm):
+    # requirement for form fields
     gender = forms.CharField(max_length=1, required=True)
     nationality = forms.CharField(max_length=100, required=True)
     state = forms.CharField(max_length=100, required=True)
@@ -33,6 +34,7 @@ class MedicalReportForm(ModelForm):
             'marital_status',
         )
 
+    # the form save function
     def save(self, commit=True):
         report = super(MedicalReportForm, self).save(commit=False)
         report.gender = (self.cleaned_data['gender']).casefold()
